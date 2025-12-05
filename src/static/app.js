@@ -522,7 +522,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Create social sharing buttons
     const shareUrl = encodeURIComponent(window.location.href);
-    const shareText = encodeURIComponent(`Check out ${name} at Mergington High School! ${details.description}`);
+    // Limit description length for social media sharing
+    const descriptionText = details.description.length > 100 
+      ? details.description.substring(0, 100) + '...' 
+      : details.description;
+    const shareText = encodeURIComponent(`Check out ${name} at Mergington High School! ${descriptionText}`);
     const shareButtons = `
       <div class="social-share-buttons">
         <span class="share-label">Share:</span>
