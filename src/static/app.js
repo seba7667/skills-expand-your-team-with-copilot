@@ -550,6 +550,41 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    // Create social sharing buttons
+    const shareUrl = encodeURIComponent(window.location.href);
+    // Limit description length for social media sharing
+    const descriptionText = details.description.length > 100 
+      ? details.description.substring(0, 100) + '...' 
+      : details.description;
+    const shareText = encodeURIComponent(`Check out ${name} at Mergington High School! ${descriptionText}`);
+    const shareButtons = `
+      <div class="social-share-buttons">
+        <span class="share-label">Share:</span>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="share-button facebook-share tooltip"
+           aria-label="Share on Facebook">
+          <span class="share-icon">📘</span>
+          <span class="tooltip-text">Share on Facebook</span>
+        </a>
+        <a href="https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="share-button twitter-share tooltip"
+           aria-label="Share on Twitter">
+          <span class="share-icon">🐦</span>
+          <span class="tooltip-text">Share on Twitter</span>
+        </a>
+        <a href="mailto:?subject=${encodeURIComponent(name + ' at Mergington High School')}&body=${shareText}%0A%0A${shareUrl}" 
+           class="share-button email-share tooltip"
+           aria-label="Share via Email">
+          <span class="share-icon">✉️</span>
+          <span class="tooltip-text">Share via Email</span>
+        </a>
+      </div>
+    `;
+
     activityCard.innerHTML = `
       ${tagHtml}
       <h4>${name}</h4>
@@ -559,6 +594,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="tooltip-text">Regular meetings at this time throughout the semester</span>
       </p>
       ${capacityIndicator}
+      ${shareButtons}
       <div class="participants-list">
         <h5>Current Participants:</h5>
         <ul>
